@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Link from "next/link";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -27,7 +28,62 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <nav className="bg-white shadow mb-4">
+          <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <Link href="/" className="text-2xl font-bold text-gray-800">
+              TrendyWear
+            </Link>
+            <div className="space-x-6">
+              <Link
+                href="/products"
+                className="text-gray-700 hover:text-black"
+              >
+                Products
+              </Link>
+              <Link
+                href="/categories"
+                className="text-gray-700 hover:text-black"
+              >
+                Categories
+              </Link>
+              <Link href="/cart" className="text-gray-700 hover:text-black">
+                Cart
+              </Link>
+              <Link
+                href="/account"
+                className="text-gray-700 hover:text-black"
+              >
+                Account
+              </Link>
+              <Link
+                href="/about"
+                className="text-gray-700 hover:text-black"
+              >
+                About
+              </Link>
+            </div>
+          </div>
+        </nav>
+        <div className="min-h-[80vh]">{children}</div>
+        <footer className="bg-gray-900 text-white py-8 mt-8">
+          <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
+            <div className="mb-4 md:mb-0">
+              <span className="font-bold text-lg">TrendyWear</span> &copy;{" "}
+              {new Date().getFullYear()} All rights reserved.
+            </div>
+            <div className="space-x-4">
+              <Link href="/about" className="hover:underline">
+                About
+              </Link>
+              <Link href="/categories" className="hover:underline">
+                Categories
+              </Link>
+              <Link href="/account" className="hover:underline">
+                Account
+              </Link>
+            </div>
+          </div>
+        </footer>
       </body>
     </html>
   );
