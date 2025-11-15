@@ -101,7 +101,7 @@ const ImageCarousel = ({ images, intervalMs = 3000, disableAutoplay = false }: I
             </motion.p>
 
             <motion.div
-                className="relative h-64 sm:h-80 w-full bg-gradient-to-r from-pink-50 via-white to-pink-50 rounded-3xl shadow-xl overflow-hidden flex items-center justify-center p-4 border border-pink-100"
+                className="relative h-64 sm:h-80 w-full bg-gradient-to-r from-pink-50 via-white to-pink-50 dark:from-gray-900 dark:via-gray-950 dark:to-black rounded-3xl shadow-xl overflow-hidden flex items-center justify-center p-4 border border-border"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true, amount: 0.3 }}

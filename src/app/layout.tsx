@@ -28,71 +28,135 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground min-h-screen flex flex-col`}
       >
         <SessionProviderWrapper>
           <Navbar />
-          <div className="min-h-[80vh] w-full">{children}</div>
-          <footer className="w-full bg-gray-900 text-gray-100 py-10 px-4 mt-16 border-t border-gray-800">
-            <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8">
-              <div>
-                <h3 className="text-lg font-bold mb-2 text-pink-400">About</h3>
-                <p className="text-sm text-gray-300">
-                  TrendyWear is your destination for the latest fashion trends in
-                  clothing. Shop with confidence and style.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-lg font-bold mb-2 text-pink-400">
-                  Contact Us
-                </h3>
-                <div className="flex gap-4 mt-2">
-                  <a
-                    href="https://instagram.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Instagram"
-                  >
-                    <Instagram className="w-6 h-6 text-gray-200 hover:text-pink-500" />
-                  </a>
-                  <a
-                    href="https://facebook.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Facebook"
-                  >
-                    <Facebook className="w-6 h-6 text-gray-200 hover:text-blue-500" />
-                  </a>
-                  <a
-                    href="https://twitter.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Twitter"
-                  >
-                    <Twitter className="w-6 h-6 text-gray-200 hover:text-sky-400" />
-                  </a>
+          <main className="flex-1">{children}</main>
+          <footer className="w-full bg-background text-foreground py-12 mt-16 border-t border-border">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                  <h3 className="text-2xl font-bold mb-4">TrendyWear</h3>
+                  <p className="text-muted-foreground mb-4">
+                    Your one-stop shop for the latest fashion trends at unbeatable
+                    prices.
+                  </p>
+                  <div className="flex space-x-4">
+                    <a
+                      href="#"
+                      className="text-foreground/70 hover:text-foreground transition-colors"
+                    >
+                      FB
+                    </a>
+                    <a
+                      href="#"
+                      className="text-foreground/70 hover:text-foreground transition-colors"
+                    >
+                      TW
+                    </a>
+                    <a
+                      href="#"
+                      className="text-foreground/70 hover:text-foreground transition-colors"
+                    >
+                      IG
+                    </a>
+                  </div>
                 </div>
-                <p className="mt-4 text-sm text-gray-300">
-                  Mail us:{" "}
-                  <a
-                    href="mailto:support@trendywear.com"
-                    className="hover:underline text-gray-200"
-                  >
-                    support@trendywear.com
-                  </a>
-                </p>
+                <div>
+                  <h4 className="text-lg font-semibold mb-4">Customer Service</h4>
+                  <ul className="space-y-2 text-muted-foreground">
+                    <li>
+                      <a
+                        href="#"
+                        className="hover:text-foreground transition-colors"
+                      >
+                        Contact Us
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="hover:text-foreground transition-colors"
+                      >
+                        Shipping Policy
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="hover:text-foreground transition-colors"
+                      >
+                        Return Policy
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="hover:text-foreground transition-colors"
+                      >
+                        FAQ
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold mb-4">Company</h4>
+                  <ul className="space-y-2 text-muted-foreground">
+                    <li>
+                      <a
+                        href="#"
+                        className="hover:text-foreground transition-colors"
+                      >
+                        About Us
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="hover:text-foreground transition-colors"
+                      >
+                        Careers
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="hover:text-foreground transition-colors"
+                      >
+                        Press
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="hover:text-foreground transition-colors"
+                      >
+                        Blog
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold mb-4">Subscribe</h4>
+                  <p className="text-muted-foreground mb-4">
+                    Get updates about new arrivals and special offers.
+                  </p>
+                  <div className="flex">
+                    <input
+                      type="email"
+                      placeholder="Enter your email"
+                      className="w-full px-4 py-2 rounded-l-md bg-muted border border-border focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    />
+                    <button className="px-4 py-2 bg-pink-600 text-white rounded-r-md hover:bg-pink-700">
+                      Subscribe
+                    </button>
+                  </div>
+                </div>
               </div>
-              <div>
-                <h3 className="text-lg font-bold mb-2 text-pink-400">
-                  Registered Office
-                </h3>
-                <p className="text-sm text-gray-300">
-                  123 Fashion Street, Mumbai, India
-                </p>
+              <div className="mt-8 pt-8 border-t border-border text-muted-foreground text-sm text-center">
+                © {new Date().getFullYear()} TrendyWear. All rights reserved.
               </div>
-            </div>
-            <div className="mt-8 text-center text-xs text-gray-400">
-              &copy; {new Date().getFullYear()} TrendyWear. All rights reserved.
             </div>
           </footer>
         </SessionProviderWrapper>

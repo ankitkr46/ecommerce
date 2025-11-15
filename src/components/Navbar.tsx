@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
 import { motion } from "framer-motion";
+import DarkModeToggle from "./DarkModeToggle";
+import { useRouter } from "next/navigation";
 
 const container = {
   hidden: { opacity: 0, y: -16 },
@@ -29,6 +31,7 @@ const underline = {
 };
 
 export default function Navbar() {
+  const router = useRouter();
   const navLinks = [
     { href: "/products", label: "Products" },
     { href: "/categories", label: "Categories" },
@@ -36,9 +39,16 @@ export default function Navbar() {
     { href: "/account", label: "Login" },
   ];
 
+  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const searchQuery = formData.get("search") as string;
+    router.push(`/products?search=${searchQuery}`);
+  };
+
   return (
     <motion.nav
-      className="w-full bg-white shadow-md border-b border-gray-200 px-4 py-3 flex items-center justify-between sticky top-0 z-50"
+      className="w-full bg-background shadow-md border-b border-border px-4 py-3 flex items-center justify-between sticky top-0 z-50"
       variants={container}
       initial="hidden"
       animate="visible"
@@ -67,11 +77,11 @@ export default function Navbar() {
               whileHover="hover"
               className="relative inline-block"
             >
-              <Link href={l.href} className="text-gray-700 hover:text-black">
+              <Link href={l.href} className="text-foreground/80 hover:text-foreground">
                 {l.label}
               </Link>
               <motion.span
-                className="pointer-events-none absolute left-0 bottom-0 h-0.5 bg-pink-500 origin-left"
+                className="absolute left-0 bottom-0 h-0.5 bg-pink-500 w-full origin-left"
                 variants={underline}
               />
             </motion.span>
@@ -86,7 +96,7 @@ export default function Navbar() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.3 }}
       >
-        <form className="flex w-full md:w-auto items-center gap-2" action="/products" method="get">
+        <form className="flex w-full md:w-auto items-center gap-2" onSubmit={handleSearch}>
           <div className="w-full md:w-64">
             <Input type="text" name="search" placeholder="Search products..." className="w-full md:w-64" />
           </div>
@@ -94,6 +104,8 @@ export default function Navbar() {
             <Button type="submit" variant="secondary">Search</Button>
           </motion.div>
         </form>
+        {/* Dark mode toggle, appended without changing positions of existing items */}
+        <DarkModeToggle />
       </motion.div>
     </motion.nav>
   );

@@ -16,6 +16,7 @@ import { motion } from "framer-motion";
 
 // Import the new ImageCarousel component
 import ImageCarousel from "@/components/ImageCarousel";
+import TestimonialsCarouselV2 from "@/components/TestimonialsCarouselV2"; // NEW IMPORT
 
 // --- Framer Motion Variants ---
 
@@ -33,7 +34,7 @@ const container = {
 // Item animation for product cards
 const item = {
     hidden: { opacity: 0, y: 50 },
-    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } },
+    show: { opacity: 1, y: 0, transition: { duration: 0.35 } },
 };
 
 // Hero text animation (split letters for a cool effect)
@@ -54,7 +55,7 @@ const wordVariants = {
 // Value Proposition Icons animation
 const iconVariants = {
     hidden: { scale: 0.8, opacity: 0 },
-    visible: { scale: 1, opacity: 1, transition: { type: "spring", stiffness: 200, damping: 10 } },
+    visible: { scale: 1, opacity: 1, transition: { duration: 0.3 } },
 };
 
 
@@ -99,7 +100,7 @@ export default function Home() {
         ));
 
     return (
-        <main className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-pink-50 px-2 sm:px-4">
+        <main className="min-h-screen bg-gradient-to-b from-white via-pink-50 to-white dark:from-gray-900 dark:via-gray-950 dark:to-black">
             {/* Hero Section */}
             <section className="relative flex flex-col items-center justify-center pt-24 pb-16 sm:pt-36 sm:pb-24 bg-white/80 shadow-2xl rounded-bl-[50px] rounded-br-[50px] mb-12 border-b-4 border-pink-200 overflow-hidden">
                 <div className="absolute inset-0 -z-10">
@@ -114,7 +115,7 @@ export default function Home() {
                 
                 {/* Animated Heading */}
                 <motion.h1
-                    className="text-4xl sm:text-7xl font-extrabold text-gray-900 mb-4 drop-shadow-2xl text-center leading-snug"
+                    className="text-4xl sm:text-7xl font-extrabold text-foreground mb-4 drop-shadow-2xl text-center leading-snug"
                     initial="hidden"
                     animate="visible"
                     variants={heroTextVariants}
@@ -130,7 +131,7 @@ export default function Home() {
 
                 {/* Animated Subtext */}
                 <motion.p
-                    className="text-lg sm:text-2xl text-gray-700 mb-10 font-medium max-w-2xl text-center"
+                    className="text-lg sm:text-2xl text-muted-foreground mb-10 font-medium max-w-2xl text-center"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 1.5, duration: 0.6 }}
@@ -155,7 +156,7 @@ export default function Home() {
             
             {/* New: Automatic Image Carousel Section */}
             <ImageCarousel />
-
+            <TestimonialsCarouselV2 />
             {/* Featured Products Section */}
             <motion.section 
                 className="py-12 sm:py-20 px-2 sm:px-4 max-w-6xl mx-auto"
@@ -164,7 +165,7 @@ export default function Home() {
                 viewport={{ once: true, amount: 0.1 }}
                 variants={container}
             >
-                <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-gray-800 text-center tracking-tight border-b pb-2 border-pink-100">
+                <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-foreground text-center tracking-tight border-b pb-2 border-pink-100">
                     🔥 This Week's Top Picks
                 </h2>
                 
@@ -176,7 +177,7 @@ export default function Home() {
                         { title: "Denim Jacket", desc: "Classic denim jacket for all seasons.", price: "$49.99", img: "/window.svg", alt: "Jacket" },
                     ].map((product, index) => (
                         <motion.div key={index} variants={item}>
-                            <Card className="rounded-2xl shadow-xl border border-pink-200 hover:scale-[1.02] hover:shadow-3xl transition-transform bg-white/95 backdrop-blur-sm group overflow-hidden cursor-pointer">
+                            <Card className="rounded-2xl shadow-xl border border-border hover:shadow-2xl transition bg-card">
                                 <CardHeader>
                                     <CardTitle className="text-xl font-extrabold text-gray-900 group-hover:text-pink-600 transition-colors">
                                         {product.title}
