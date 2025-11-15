@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Link from "next/link";
+import SessionProviderWrapper from "./SessionProviderWrapper";
 import "./globals.css";
+import { Instagram, Facebook, Twitter } from "lucide-react";
+import Navbar from "@/components/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,64 +28,74 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50`}
       >
-        <nav className="bg-white shadow mb-4">
-          <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            <Link href="/" className="text-2xl font-bold text-gray-800">
-              TrendyWear
-            </Link>
-            <div className="space-x-6">
-              <Link
-                href="/products"
-                className="text-gray-700 hover:text-black"
-              >
-                Products
-              </Link>
-              <Link
-                href="/categories"
-                className="text-gray-700 hover:text-black"
-              >
-                Categories
-              </Link>
-              <Link href="/cart" className="text-gray-700 hover:text-black">
-                Cart
-              </Link>
-              <Link
-                href="/account"
-                className="text-gray-700 hover:text-black"
-              >
-                Account
-              </Link>
-              <Link
-                href="/about"
-                className="text-gray-700 hover:text-black"
-              >
-                About
-              </Link>
+        <SessionProviderWrapper>
+          <Navbar />
+          <div className="min-h-[80vh] w-full">{children}</div>
+          <footer className="w-full bg-gray-900 text-gray-100 py-10 px-4 mt-16 border-t border-gray-800">
+            <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8">
+              <div>
+                <h3 className="text-lg font-bold mb-2 text-pink-400">About</h3>
+                <p className="text-sm text-gray-300">
+                  TrendyWear is your destination for the latest fashion trends in
+                  clothing. Shop with confidence and style.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-lg font-bold mb-2 text-pink-400">
+                  Contact Us
+                </h3>
+                <div className="flex gap-4 mt-2">
+                  <a
+                    href="https://instagram.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                  >
+                    <Instagram className="w-6 h-6 text-gray-200 hover:text-pink-500" />
+                  </a>
+                  <a
+                    href="https://facebook.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Facebook"
+                  >
+                    <Facebook className="w-6 h-6 text-gray-200 hover:text-blue-500" />
+                  </a>
+                  <a
+                    href="https://twitter.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Twitter"
+                  >
+                    <Twitter className="w-6 h-6 text-gray-200 hover:text-sky-400" />
+                  </a>
+                </div>
+                <p className="mt-4 text-sm text-gray-300">
+                  Mail us:{" "}
+                  <a
+                    href="mailto:support@trendywear.com"
+                    className="hover:underline text-gray-200"
+                  >
+                    support@trendywear.com
+                  </a>
+                </p>
+              </div>
+              <div>
+                <h3 className="text-lg font-bold mb-2 text-pink-400">
+                  Registered Office
+                </h3>
+                <p className="text-sm text-gray-300">
+                  123 Fashion Street, Mumbai, India
+                </p>
+              </div>
             </div>
-          </div>
-        </nav>
-        <div className="min-h-[80vh]">{children}</div>
-        <footer className="bg-gray-900 text-white py-8 mt-8">
-          <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-4 md:mb-0">
-              <span className="font-bold text-lg">TrendyWear</span> &copy;{" "}
-              {new Date().getFullYear()} All rights reserved.
+            <div className="mt-8 text-center text-xs text-gray-400">
+              &copy; {new Date().getFullYear()} TrendyWear. All rights reserved.
             </div>
-            <div className="space-x-4">
-              <Link href="/about" className="hover:underline">
-                About
-              </Link>
-              <Link href="/categories" className="hover:underline">
-                Categories
-              </Link>
-              <Link href="/account" className="hover:underline">
-                Account
-              </Link>
-            </div>
-          </div>
-        </footer>
+          </footer>
+        </SessionProviderWrapper>
       </body>
     </html>
   );
