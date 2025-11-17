@@ -36,6 +36,7 @@ export default function Navbar() {
     { href: "/products", label: "Products" },
     { href: "/categories", label: "Categories" },
     { href: "/cart", label: "Cart" },
+    { href: "/faq", label: "FAQ" },
     { href: "/account", label: "Login" },
   ];
 
