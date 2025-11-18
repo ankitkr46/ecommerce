@@ -60,26 +60,22 @@ export async function POST() {
 
     for (const p of sampleProducts) {
       const categoryId = await getCategoryId(p.categorySlug);
-      await prisma.product.upsert({
-        where: { name: p.name },
-        update: {
-          description: p.description,
-          price: p.price,
-          imageUrl: p.imageUrl,
-          color: p.color,
-          size: p.size,
-          categoryId,
-        },
-        create: {
-          name: p.name,
-          description: p.description,
-          price: p.price,
-          imageUrl: p.imageUrl,
-          color: p.color,
-          size: p.size,
-          categoryId,
-        },
-      });
+      // Product currently has no unique constraint on name, so emulate upsert
+      const existing = await prisma.product.findFirst({ where: { name: p.name } });
+      const data = {
+        name: p.name,
+        description: p.description,
+        price: p.price,
+        imageUrl: p.imageUrl,
+        color: p.color,
+        size: p.size,
+        categoryId,
+      };
+      if (existing) {
+        await prisma.product.update({ where: { id: existing.id }, data });
+      } else {
+        await prisma.product.create({ data });
+      }
     }
 
     return NextResponse.json({ ok: true });

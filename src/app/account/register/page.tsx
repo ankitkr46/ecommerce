@@ -1,12 +1,12 @@
 "use client";
 
-import LoginForm from "@/components/LoginForm";
+import RegisterForm from "@/components/RegisterForm";
 
-export default function AccountLoginPage() {
+export default function RegisterPage() {
   return (
     <main className="min-h-screen bg-black/60 backdrop-blur-sm flex items-center justify-center px-4">
       <div className="w-full max-w-lg">
-        <LoginForm />
+        <RegisterForm />
       </div>
     </main>
   );
