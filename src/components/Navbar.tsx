@@ -33,6 +33,7 @@ const underline = {
 export default function Navbar() {
   const router = useRouter();
   const navLinks = [
+    { href: "/new-arrivals", label: "New Arrivals" },
     { href: "/products", label: "Products" },
     { href: "/categories", label: "Categories" },
     { href: "/cart", label: "Cart" },
