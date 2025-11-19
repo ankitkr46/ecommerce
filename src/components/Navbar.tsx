@@ -24,11 +24,7 @@ const linkItem = {
   hover: { y: -2 },
 };
 
-// Use width animation for maximum compatibility/visibility
-const underline = {
-  rest: { width: 0 },
-  hover: { width: "100%", transition: { duration: 0.25 } },
-};
+// Removed underline hover animation per request
 
 export default function Navbar() {
   const router = useRouter();
@@ -71,22 +67,27 @@ export default function Navbar() {
           animate="visible"
         >
           {navLinks.map((l) => (
-            <motion.span
+            <motion.div
               key={l.href}
               variants={linkItem}
               initial="rest"
               animate="rest"
-              whileHover="hover"
-              className="relative inline-block"
+              whileHover={{
+                backgroundColor: "#F3F4F6",
+                scale: 1.05,
+                color: "#EC4899",
+              }}
+              transition={{ duration: 0.45}}
+              className="px-3 py-1 rounded-md inline-block cursor-pointer"
             >
-              <Link href={l.href} className="text-foreground/80 hover:text-foreground">
+              <Link
+                href={l.href}
+                className="text-foreground/80 hover:text-foreground"
+                style={{ display: "inline-block", width: "100%" }}
+              >
                 {l.label}
               </Link>
-              <motion.span
-                className="absolute left-0 bottom-0 h-0.5 bg-pink-500 w-full origin-left"
-                variants={underline}
-              />
-            </motion.span>
+            </motion.div>
           ))}
         </motion.div>
       </div>

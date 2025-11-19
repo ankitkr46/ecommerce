@@ -1,26 +1,46 @@
 import ProductCard from "../../components/ProductCard";
-import { prisma } from "../../lib/prisma";
+import { products as fallbackProducts } from "../../data/products";
 
 export default async function NewArrivalsPage() {
-  // Query the latest products directly via Prisma to avoid relative fetch issues in RSC
-  const items = await prisma.product.findMany({
-    orderBy: { createdAt: "desc" },
-    include: { category: true },
-    take: 12,
-  });
+  let newest: Array<{
+    id: string;
+    name: string;
+    description: string;
+    price: number;
+    category: string;
+    color: string;
+    size: string;
+    imageUrl: string;
+  }> = [];
 
-  // Adapt DB records to ProductCard's expected shape
-  const newest = items.map((p) => ({
-    id: p.id,
-    name: p.name,
-    description: p.description,
-    // Prisma Decimal can be BigInt-like; cast to number for the card
-    price: typeof (p.price as any) === "string" ? parseFloat(p.price as any) : Number(p.price),
-    category: (p as any).category?.name ?? "",
-    color: p.color,
-    size: p.size,
-    imageUrl: p.imageUrl,
-  }));
+  // Prefer DB if configured; gracefully fall back to static data otherwise
+  if (process.env.DATABASE_URL) {
+    try {
+      const { prisma } = await import("../../lib/prisma");
+      const items = await prisma.product.findMany({
+        orderBy: { createdAt: "desc" },
+        include: { category: true },
+        take: 12,
+      });
+      newest = items.map((p) => ({
+        id: p.id,
+        name: p.name,
+        description: p.description,
+        price: typeof (p.price as any) === "string" ? parseFloat(p.price as any) : Number(p.price),
+        category: (p as any).category?.name ?? "",
+        color: p.color,
+        size: p.size,
+        imageUrl: p.imageUrl,
+      }));
+    } catch (e) {
+      console.error("New Arrivals DB query failed, falling back to static data:", e);
+    }
+  }
+
+  if (newest.length === 0) {
+    // Static fallback: last 8 items reversed
+    newest = [...fallbackProducts].slice(-8).reverse();
+  }
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-white via-pink-50 to-white dark:from-gray-900 dark:via-gray-950 dark:to-black">

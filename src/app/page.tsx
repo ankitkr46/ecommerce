@@ -101,56 +101,68 @@ export default function Home() {
 
     return (
         <main className="min-h-screen bg-gradient-to-b from-white via-pink-50 to-white dark:from-gray-900 dark:via-gray-950 dark:to-black">
-            {/* Hero Section */}
-            <section className="relative flex flex-col items-center justify-center pt-24 pb-16 sm:pt-36 sm:pb-24 bg-white/80 shadow-2xl rounded-bl-[50px] rounded-br-[50px] mb-12 border-b-4 border-pink-200 overflow-hidden">
-                <div className="absolute inset-0 -z-10">
-                    <Image
-                        src="/cheerful-happy-woman-enjoying-shopping-260nw-1417347668.webp"
-                        alt="Shopping Girl"
-                        fill
-                        className="object-cover object-center opacity-30 saturate-150"
-                        priority
-                    />
-                </div>
-                
-                {/* Animated Heading */}
-                <motion.h1
-                    className="text-4xl sm:text-7xl font-extrabold text-foreground mb-4 drop-shadow-2xl text-center leading-snug"
-                    initial="hidden"
-                    animate="visible"
-                    variants={heroTextVariants}
-                >
-                    <span className="block text-xl sm:text-3xl font-light text-pink-500 mb-2">
-                        {"Fashion Reimagined"}
-                    </span>
-                    {renderHeroTitle("Welcome to")}
-                    <span className="text-pink-500 block">
-                        {renderHeroTitle("TrendyWear")}
-                    </span>
-                </motion.h1>
-
-                {/* Animated Subtext */}
-                <motion.p
-                    className="text-lg sm:text-2xl text-muted-foreground mb-10 font-medium max-w-2xl text-center"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.5, duration: 0.6 }}
-                >
-                    Discover the latest fashion in clothing for men and women. **Style starts here.**
-                </motion.p>
-                
-                {/* Animated Button */}
-                <motion.div
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ delay: 1.8, type: "spring", stiffness: 200 }}
-                >
-                    <Button className="px-10 py-4 text-xl font-bold shadow-2xl bg-pink-500 hover:bg-pink-600 text-white rounded-full transition-all duration-300 hover:shadow-pink-500/50">
-                        Explore Collections
-                    </Button>
-                </motion.div>
-            </section>
-
+           {/* Hero Section (refactored to left-aligned two-column layout) */}
+<section className="relative pt-24 pb-16 sm:pt-32 sm:pb-20 mb-12 border-b-4 border-pink-200 bg-white/90 shadow-2xl rounded-bl-[50px] rounded-br-[50px]">
+    <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
+        {/* Left Column: Text Content */}
+        <div className="flex-1 order-2 md:order-1">
+            <motion.h1
+                className="text-4xl sm:text-6xl font-extrabold text-foreground mb-6 leading-tight text-left drop-shadow-2xl"
+                initial="hidden"
+                animate="visible"
+                variants={heroTextVariants}
+            >
+                <span className="block text-lg sm:text-2xl font-light text-pink-500 mb-3">
+                    {"Fashion Reimagined"}
+                </span>
+                {renderHeroTitle("Welcome to")}
+                <span className="text-pink-500 block">
+                    {renderHeroTitle("TrendyWear")}
+                </span>
+            </motion.h1>
+            <motion.p
+                className="text-base sm:text-xl text-muted-foreground mb-8 font-medium max-w-xl text-left"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.3, duration: 0.6 }}
+            >
+                Discover the latest fashion in clothing for men and women. <strong>Style starts here.</strong>
+            </motion.p>
+            <motion.div
+                initial={{ scale: 0.85, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 1.6, type: "spring", stiffness: 210 }}
+            >
+                <Button className="px-10 py-4 text-lg font-bold shadow-xl bg-pink-500 hover:bg-pink-600 text-white rounded-full transition-all duration-300 hover:shadow-pink-500/50">
+                    Explore Collections
+                </Button>
+            </motion.div>
+        </div>
+        {/* Right Column: Image - CLEAN CUTOUT STYLE */}
+        <motion.div
+            // Increased max-w-md to max-w-lg to give the cutout more presence
+            className="flex-1 w-full max-w-lg order-1 md:order-2"
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7 }}
+        >
+            {/* REMOVED: rounded-3xl, overflow-hidden, shadow-2xl, ring-2, bg-gradient */}
+            <div className="relative aspect-[4/5] w-full"> 
+                <Image
+                    // Set the SRC based on your public path
+                    src="/Gemini_Generated_Image_84bqiw84bqiw84bq.png"
+                    alt="Happy family shopping cutout"
+                    fill
+                    priority
+                    // Kept object-cover to ensure the image fills the aspect ratio container
+                    // Removed scale-105 for a standard fit
+                    className="object-cover object-center"
+                />
+                {/* REMOVED: The pink overlay div */}
+            </div>
+        </motion.div>
+    </div>
+</section>
             {/* Value Proposition */}
             <ValueProposition />
             
