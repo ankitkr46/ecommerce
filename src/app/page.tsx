@@ -138,27 +138,27 @@ export default function Home() {
                 </Button>
             </motion.div>
         </div>
-        {/* Right Column: Image - CLEAN CUTOUT STYLE */}
+        {/* Right Column: Image */}
         <motion.div
-            // Increased max-w-md to max-w-lg to give the cutout more presence
             className="flex-1 w-full max-w-lg order-1 md:order-2"
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
+            whileHover={{ scale: 1.02 }}
         >
-            {/* REMOVED: rounded-3xl, overflow-hidden, shadow-2xl, ring-2, bg-gradient */}
-            <div className="relative aspect-[4/5] w-full"> 
+            <div className="relative aspect-[4/3] w-full rounded-3xl overflow-hidden shadow-xl bg-gradient-to-br from-orange-50 via-yellow-50 to-white">
                 <Image
-                    // Set the SRC based on your public path
                     src="/Gemini_Generated_Image_84bqiw84bqiw84bq.png"
-                    alt="Happy family shopping cutout"
+                    alt="Happy family enjoying shopping together"
                     fill
                     priority
-                    // Kept object-cover to ensure the image fills the aspect ratio container
-                    // Removed scale-105 for a standard fit
                     className="object-cover object-center"
+                    style={{
+                        filter: "contrast(1.05) saturate(1.1) brightness(1.02)",
+                    }}
                 />
-                {/* REMOVED: The pink overlay div */}
+                {/* Subtle vignette for depth */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none" />
             </div>
         </motion.div>
     </div>
