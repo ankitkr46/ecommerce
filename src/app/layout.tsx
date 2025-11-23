@@ -33,9 +33,39 @@ export default function RootLayout({
         <SessionProviderWrapper>
           <Navbar />
           <main className="flex-1">{children}</main>
-          <footer className="w-full bg-background text-foreground py-12 mt-16 border-t border-border">
+          
+          {/* Newsletter Subscribe Section */}
+          <section className="w-full py-12 px-4 sm:px-6 lg:px-8 mt-16">
+            <div className="max-w-4xl mx-auto">
+              <div className="bg-gradient-to-r from-pink-500 to-purple-600 dark:from-pink-600 dark:to-purple-700 rounded-2xl shadow-2xl p-8 sm:p-12">
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+                    Stay Updated with TrendyWear
+                  </h3>
+                  <p className="text-pink-50 text-base sm:text-lg">
+                    Get exclusive deals, new arrivals, and fashion tips delivered to your inbox.
+                  </p>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto">
+                  <input
+                    type="email"
+                    placeholder="Enter your email address"
+                    className="flex-1 px-5 py-3.5 rounded-xl bg-white/95 dark:bg-white/90 border-2 border-white/50 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent text-gray-900 placeholder:text-gray-500 shadow-lg"
+                  />
+                  <button className="px-8 py-3.5 bg-white text-pink-600 font-semibold rounded-xl hover:bg-pink-50 transition-all shadow-lg hover:shadow-xl hover:scale-105 active:scale-95">
+                    Subscribe
+                  </button>
+                </div>
+                <p className="text-center text-pink-100 text-xs sm:text-sm mt-4">
+                  ✨ Join 10,000+ fashion lovers. Unsubscribe anytime.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <footer className="w-full bg-background text-foreground py-12 mt-8 border-t border-border">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
                   <h3 className="text-2xl font-bold mb-4">TrendyWear</h3>
                   <p className="text-muted-foreground mb-4">
@@ -136,22 +166,6 @@ export default function RootLayout({
                       </a>
                     </li>
                   </ul>
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold mb-4">Subscribe</h4>
-                  <p className="text-muted-foreground mb-4">
-                    Get updates about new arrivals and special offers.
-                  </p>
-                  <div className="flex">
-                    <input
-                      type="email"
-                      placeholder="Enter your email"
-                      className="w-full px-4 py-2 rounded-l-md bg-muted border border-border focus:outline-none focus:ring-2 focus:ring-pink-500"
-                    />
-                    <button className="px-4 py-2 bg-pink-600 text-white rounded-r-md hover:bg-pink-700">
-                      Subscribe
-                    </button>
-                  </div>
                 </div>
               </div>
               <div className="mt-8 pt-8 border-t border-border text-muted-foreground text-sm text-center">
