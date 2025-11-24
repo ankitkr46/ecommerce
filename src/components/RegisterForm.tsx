@@ -16,13 +16,10 @@ export default function RegisterForm() {
   const [username, setUsername] = useState("");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
-  const [graduationYear, setGraduationYear] = useState<string>("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-
-  const years = Array.from({ length: 8 }, (_, i) => String(new Date().getFullYear() + i));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,7 +34,7 @@ export default function RegisterForm() {
     const res = await fetch("/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, name: fullName, email, graduationYear, password }),
+      body: JSON.stringify({ username, name: fullName, email, password }),
     });
 
     if (!res.ok) {
@@ -52,7 +49,7 @@ export default function RegisterForm() {
   return (
     <div className="max-w-md w-full mx-auto rounded-2xl p-8 shadow-lg bg-card border border-border">
       <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold text-foreground">Welcome to TrendyWear</h2>
+        <h2 className="text-2xl font-bold text-foreground">Welcome to Tashok Threads</h2>
         <p className="text-muted-foreground">Sign up to start your journey with us</p>
       </div>
 
@@ -70,17 +67,6 @@ export default function RegisterForm() {
         <Input placeholder="Username" value={username} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)} required />
         <Input placeholder="Full Name" value={fullName} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFullName(e.target.value)} required />
         <Input type="email" placeholder="john@gmail.com" value={email} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} required />
-
-        <Select onValueChange={(v) => setGraduationYear(v)}>
-          <SelectTrigger>
-            <SelectValue placeholder="Choose Your Graduation Year" />
-          </SelectTrigger>
-          <SelectContent>
-            {years.map((y) => (
-              <SelectItem key={y} value={y}>{y}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <Input type="password" placeholder="Password" value={password} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} required />

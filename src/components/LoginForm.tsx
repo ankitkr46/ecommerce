@@ -31,7 +31,7 @@ export default function LoginForm() {
   return (
     <div className="max-w-md w-full mx-auto rounded-2xl p-8 shadow-lg bg-card border border-border">
       <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold text-foreground">Welcome to TrendyWear</h2>
+        <h2 className="text-2xl font-bold text-foreground">Welcome to Tashok Threads</h2>
         <p className="text-muted-foreground">Sign up to start your journey with us</p>
       </div>
 

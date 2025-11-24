@@ -117,7 +117,7 @@ export default function Home() {
                 </span>
                 {renderHeroTitle("Welcome to")}
                 <span className="text-pink-500 block">
-                    {renderHeroTitle("TrendyWear")}
+                    {renderHeroTitle("Tashok Threads")}
                 </span>
             </motion.h1>
             <motion.p

@@ -8,7 +8,7 @@ import { Star } from "lucide-react";
 const testimonials = [
     { 
         name: "Sarah K.", 
-        review: "The quality is unmatched! Everything I bought was exactly as pictured and arrived quickly. TrendyWear is my new favorite shop!", 
+        review: "The quality is unmatched! Everything I bought was exactly as pictured and arrived quickly. Tashok Threads is my new favorite shop!", 
         rating: 5,
         city: "New York, NY"
     },

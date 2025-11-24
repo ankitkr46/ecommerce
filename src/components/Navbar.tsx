@@ -55,7 +55,7 @@ export default function Navbar() {
       <div className="flex items-center gap-4">
         <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
           <Link href="/" className="text-2xl font-extrabold text-pink-500 tracking-wide">
-            TrendyWear
+            Tashok Threads
           </Link>
         </motion.div>
 
