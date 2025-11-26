@@ -13,7 +13,6 @@ import {
 } from "./ui/select";
 
 export default function RegisterForm() {
-  const [username, setUsername] = useState("");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,7 +33,7 @@ export default function RegisterForm() {
     const res = await fetch("/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, name: fullName, email, password }),
+      body: JSON.stringify({ name: fullName, email, password }),
     });
 
     if (!res.ok) {
@@ -64,7 +63,6 @@ export default function RegisterForm() {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <Input placeholder="Username" value={username} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)} required />
         <Input placeholder="Full Name" value={fullName} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFullName(e.target.value)} required />
         <Input type="email" placeholder="john@gmail.com" value={email} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} required />
 

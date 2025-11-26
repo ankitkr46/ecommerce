@@ -6,6 +6,7 @@ import { Button } from "./ui/button";
 import { motion } from "framer-motion";
 import DarkModeToggle from "./DarkModeToggle";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const container = {
   hidden: { opacity: 0, y: -16 },
@@ -28,13 +29,15 @@ const linkItem = {
 
 export default function Navbar() {
   const router = useRouter();
+  const { data: session } = useSession();
+  
   const navLinks = [
     { href: "/new-arrivals", label: "New Arrivals" },
     { href: "/products", label: "Products" },
     { href: "/categories", label: "Categories" },
     { href: "/cart", label: "Cart" },
     { href: "/faq", label: "FAQ" },
-    { href: "/account", label: "Login" },
+    ...(session ? [{ href: "/profile", label: "Profile" }] : [{ href: "/account", label: "Login" }]),
   ];
 
   const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {

@@ -4,17 +4,17 @@ import bcrypt from "bcrypt";
 
 export async function POST(req: Request) {
   try {
-    const { username, name, email, password } = await req.json();
+    const { name, email, password } = await req.json();
 
-    if (!email || !password || !username) {
+    if (!email || !password || !name) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
     const existing = await prisma.user.findFirst({
-      where: { OR: [{ email }, { username }] },
+      where: { email },
     });
     if (existing) {
-      return NextResponse.json({ error: "Email or username already in use" }, { status: 400 });
+      return NextResponse.json({ error: "Email already in use" }, { status: 400 });
     }
 
     const hashed = await bcrypt.hash(password, 10);
@@ -23,7 +23,6 @@ export async function POST(req: Request) {
       data: {
         email,
         name,
-        username,
         password: hashed,
       },
     });

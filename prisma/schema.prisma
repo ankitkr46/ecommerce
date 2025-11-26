@@ -9,7 +9,6 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model Category {
@@ -39,7 +38,6 @@ model User {
   id            String    @id @default(cuid())
   name          String?
   email         String?   @unique
-  username      String?   @unique
   emailVerified DateTime?
   image         String?
   password      String?
