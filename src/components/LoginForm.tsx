@@ -24,7 +24,7 @@ export default function LoginForm() {
     if (result?.error) {
       setError(result.error);
     } else {
-      window.location.href = "/";
+      window.location.href = "/profile";
     }
   };
 
@@ -36,7 +36,7 @@ export default function LoginForm() {
       </div>
 
       <button
-        onClick={() => signIn("google")}
+        onClick={() => signIn("google", { callbackUrl: "/profile" })}
         className="w-full flex items-center justify-center gap-2 py-2 px-4 border border-border rounded-md hover:bg-muted transition-colors mb-4"
       >
         Continue with Google
