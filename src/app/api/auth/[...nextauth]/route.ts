@@ -1,13 +1,22 @@
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 import NextAuth from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-import CredentialsProvider from "next-auth/providers/credentials";
+import type { NextAuthConfig } from "next-auth";
+import Google from "next-auth/providers/google";
+import Credentials from "next-auth/providers/credentials";
 import { prisma } from "../../../../lib/prisma";
 import bcrypt from "bcrypt";
 
-const handler = NextAuth({
+const authOptions: NextAuthConfig = {
+  trustHost: true,
+  debug: process.env.NODE_ENV !== "production",
   providers: [
-    CredentialsProvider({
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+    Credentials({
       name: "Credentials",
       credentials: {
         email: { label: "Email", type: "email" },
@@ -21,28 +30,31 @@ const handler = NextAuth({
         const user = await prisma.user.findUnique({ where: { email } });
         if (!user || !user.password) return null;
 
-        const isValid = await bcrypt.compare(password, user.password);
-        if (!isValid) return null;
+        const ok = await bcrypt.compare(password, user.password);
+        if (!ok) return null;
 
-        // Return the user object. NextAuth will include this on the session.
-        return {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-        };
+        return { id: String(user.id), name: user.name ?? null, email: user.email };
       },
     }),
-
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
   ],
-   session: { strategy: "jwt" },
+  session: { strategy: "jwt" as const },
+  secret: process.env.AUTH_SECRET ?? process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async redirect({ url, baseUrl }: { url: string; baseUrl: string }) {
+      if (url.startsWith(baseUrl)) return url;
+      return `${baseUrl}/profile`;
+    },
+  },
+};
 
-  secret: process.env.NEXTAUTH_SECRET,
-});
+export const {
+  handlers: { GET, POST },
+  auth,
+  signIn,
+  signOut,
+} = NextAuth(authOptions);
 
 
-export { handler as GET, handler as POST };
+
+
 
